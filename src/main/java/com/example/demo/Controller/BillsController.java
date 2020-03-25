@@ -3,9 +3,11 @@ package com.example.demo.Controller;
 import com.example.demo.Model.Bill;
 import com.example.demo.Model.TransActionsQueue;
 import com.example.demo.Model.UserLogin;
+import com.example.demo.Repositories.BillsRepo;
 import com.example.demo.Repositories.ITransactionsQueue;
 import com.example.demo.Repositories.UserLoginRepo;
 import org.apache.tomcat.jni.Local;
+import org.hibernate.validator.constraints.pl.REGON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -61,8 +63,12 @@ public class BillsController {
 
     @PostMapping("/paybill")
     public ResponseEntity<Bill> paybills(@RequestParam(name = "Email") String Email,
-                                         @RequestParam(name = "TransactionName") String Transaction,
-                                         @RequestParam(name = "fromAccount") String Faccount,
+                                         @RequestParam(name = "TransactionName") String transActionName,
+                                         @RequestParam(name = "fromAccount") String Faccount,@RequestParam(name = "value") Double value,
+                                         @RequestParam(name = "accountNumber") Long accountNumber,
+                                         @RequestParam(name = "pbs",defaultValue = "false") boolean pbs,
+                                         @RequestParam(name = "registrationNumber") Long registrationNumber,
+                                         @RequestParam(name = "serviceCode") String serviceCode,
                                          @RequestParam(name = "date") String date){
 
         System.out.println(date);
@@ -77,11 +83,11 @@ public class BillsController {
                     for (int j = 1; j < 12; j++){
 
                         LocalDate payBillInTheFuture = fromTheFirstOfMonth.plus(j, ChronoUnit.MONTHS);
-                        TransActionQueue transferQueue = new TransferQueue(transActionName, "", userLogin.getAccountsList().get(i).getAccountNumber(), userLogin.getAccountsList().get(i).getRegistrationNumber(), accountNumbe, registrationNumber, value, payBillInTheFuture);
-                        iTransactionsQueue.save(transferQueue);
+                        TransActionsQueue transActionsQueue = new TransActionsQueue(transActionName, "", userLogin.getAccountsList().get(i).getAccountNumber(), userLogin.getAccountsList().get(i).getRegistrationNumber(), accountNumber, registrationNumber, value, payBillInTheFuture);
+                        iTransactionsQueue.save(transActionsQueue);
                     }
                     }
-                 TransActionsQueue transActionsQueue = new TransferQueue(tranceActionName, "", userLogin.getAccountsList().getAccountNumber(), userLogin.getAccountsList().getRegistrationNumber(), accountNumber, registrationNumber, value, returnFormatDate(date));
+                 TransActionsQueue transActionsQueue = new TransActionsQueue(transActionName, "", userLogin.getAccountsList().get(i).getAccountNumber(), userLogin.getAccountsList().get(i).getRegistrationNumber(), accountNumber, registrationNumber, value, returnFormatDate(date));
                     iTransactionsQueue.save(transActionsQueue);
             }
             return new ResponseEntity(HttpStatus.UNAUTHORIZED);
@@ -91,13 +97,15 @@ public class BillsController {
     }
 
     public LocalDate returnFormatDate(String date){
-        int day = Integer.valueOf(date.substring((0,2));
+        int day = Integer.valueOf(date.substring(0,2));
         System.out.println(day);
         int month = Integer.valueOf(date.substring(4,5));
         System.out.println(month);
         int year = Integer.valueOf(date.substring(6));
         System.out.println(year);
         LocalDate localDate = LocalDate.of(year, month, day+1);
+
+        return localDate;
     }
 
 

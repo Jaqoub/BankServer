@@ -1,7 +1,6 @@
 package com.example.demo.Model;
 
 import javax.persistence.*;
-import javax.transaction.Transaction;
 import java.util.List;
 
 @Entity
@@ -10,10 +9,12 @@ public class Accounts {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String account;
+    private String accountName;
     private String accountType;
     private double currentDeposit;
     private long registrationNumber;
     private long accountNumber;
+    private double transActionAmount;
 
     @OneToMany(cascade = {CascadeType.ALL})
     private List<TransActions> transActions;
@@ -22,10 +23,15 @@ public class Accounts {
 
     }
 
-    public Accounts(String account, String accountType, double currentDeposit,
+
+    //getTransactionAmount
+
+
+    public Accounts(String account, String accountType, int i, double currentDeposit,
                     long registrationNumber, Long accountNumber, List<TransActions> transActions){
         this.account = account;
         this.accountType = accountType;
+        this.accountName = accountName;
         this.currentDeposit = currentDeposit;
         this.registrationNumber = registrationNumber;
         this.accountNumber = accountNumber;
@@ -86,5 +92,21 @@ public class Accounts {
 
     public void setTransActions(List<TransActions> transActions) {
         this.transActions = transActions;
+    }
+
+    public void setAccountName(String accountName){
+        this.accountName = accountName;
+    }
+
+    public String getAccountName(){
+        return accountName;
+    }
+
+    public double getTransActionAmount() {
+        return transActionAmount;
+    }
+
+    public void setTransActionAmount(double transActionAmount) {
+        this.transActionAmount = transActionAmount;
     }
 }

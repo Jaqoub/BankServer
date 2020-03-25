@@ -8,33 +8,54 @@ import java.time.LocalDate;
 
 @Entity
 public class TransActionsQueue {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String transActionName;
-    private String textToReciever;
-    private Long fromAccountNumber;
-    private Long fromRegistrationNumber;
-    private Long toAccountNumber;
-    private double transActionAmount;
+    private String texttoReciever;
+    private Long FromaccountNumber;
+    private Long FromregistrationNumber;
+    private Long TocountNumber;
+    private Long TOgistrationNumber;
+    private double transactionAmount;
     private LocalDate date;
+    private String text;
+    private Long FaccN;
+    private Long Freg;
+    private Long TaccN;
+    private Long Treg;
+    private double amount;
+    public TransActionsQueue(){
 
-    public TransActionsQueue(){}
 
-    public TransActionsQueue(String transActionName,
-                             String textToReciever,
-                             Long fromAccountNumber,
-                             Long fromRegistrationNumber,
-                             Long toAccountNumber,
-                             double transActionAmount,
-                             LocalDate date){
-       this.transActionName = transActionName;
-       this.fromAccountNumber = fromAccountNumber;
-       this.fromRegistrationNumber = fromRegistrationNumber;
-       this.toAccountNumber = toAccountNumber;
-       this.transActionAmount = transActionAmount;
-       this.date = date;
     }
+
+    public TransActionsQueue(String transActionName, String texttoReciever, Long fromaccountNumber, Long fromregistrationNumber, String accountType, Long tocountNumber, Long TOgistrationNumber, double transactionAmmount, LocalDate date) {
+        this.transActionName = transActionName;
+        this.texttoReciever = texttoReciever;
+        this.FromaccountNumber = fromaccountNumber;
+        this.FromregistrationNumber = fromregistrationNumber;
+        this.TocountNumber = tocountNumber;
+        this.TOgistrationNumber = TOgistrationNumber;
+        this.transactionAmount = transactionAmmount;
+        this.date = date;
+    }
+
+    public TransActionsQueue(String transActionName, String text,
+                             Long FaccN,Long Freg, Long Treg, Long TaccN,
+                             double amount,
+                             LocalDate date){
+        this.transActionName = transActionName;
+        this.text = text;
+        this.FaccN = FaccN;
+        this.Freg = Freg;
+        this.Treg = Treg;
+        this.amount = amount;
+        this.date = date;
+
+    }
+
 
     public Long getId() {
         return id;
@@ -52,44 +73,44 @@ public class TransActionsQueue {
         this.transActionName = transActionName;
     }
 
-    public String getTextToReciever() {
-        return textToReciever;
+    public Long getFromaccountNumber() {
+        return FromaccountNumber;
     }
 
-    public void setTextToReciever(String textToReciever) {
-        this.textToReciever = textToReciever;
+    public void setFromaccountNumber(Long fromaccountNumber) {
+        FromaccountNumber = fromaccountNumber;
     }
 
-    public Long getFromAccountNumber() {
-        return fromAccountNumber;
+    public Long getFromregistrationNumber() {
+        return FromregistrationNumber;
     }
 
-    public void setFromAccountNumber(Long fromAccountNumber) {
-        this.fromAccountNumber = fromAccountNumber;
+    public void setFromregistrationNumber(Long fromregistrationNumber) {
+        FromregistrationNumber = fromregistrationNumber;
     }
 
-    public Long getFromRegistrationNumber() {
-        return fromRegistrationNumber;
+    public Long getTocountNumber() {
+        return TocountNumber;
     }
 
-    public void setFromRegistrationNumber(Long fromRegistrationNumber) {
-        this.fromRegistrationNumber = fromRegistrationNumber;
+    public void setTocountNumber(Long tocountNumber) {
+        TocountNumber = tocountNumber;
     }
 
-    public Long getToAccountNumber() {
-        return toAccountNumber;
+    public Long getTOgistrationNumber() {
+        return TOgistrationNumber;
     }
 
-    public void setToAccountNumber(Long toAccountNumber) {
-        this.toAccountNumber = toAccountNumber;
+    public void setTOgistrationNumber(Long TOgistrationNumber) {
+        this.TOgistrationNumber = TOgistrationNumber;
     }
 
-    public double getTransActionAmount() {
-        return transActionAmount;
+    public double getTransactionAmount() {
+        return transactionAmount;
     }
 
-    public void setTransActionAmount(double transActionAmount) {
-        this.transActionAmount = transActionAmount;
+    public void setTransactionAmount(double transactionAmmount) {
+        this.transactionAmount = transactionAmmount;
     }
 
     public LocalDate getDate() {
@@ -98,5 +119,13 @@ public class TransActionsQueue {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public String getTexttoReciever() {
+        return texttoReciever;
+    }
+
+    public void setTexttoReciever(String texttoReciever) {
+        this.texttoReciever = texttoReciever;
     }
 }

@@ -3,6 +3,7 @@ package com.example.demo.Controller;
 import com.example.demo.Model.*;
 import com.example.demo.Model.Accounts;
 import com.example.demo.Model.TransActions;
+import com.example.demo.Repositories.IAccountsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +26,9 @@ public class AccountController {
     @Autowired
     ITransactionsQueue iTransactionsQueue;
     @Autowired
-    IAccountRepository iAccountRepository;
+    IAccountsRepository iAccountRepository;
 
-    private Long RegistrationNumber = 4444;
+    private Long RegistrationNumber = 4444L;
 
     @PostMapping("/newAccount")
     public ResponseEntity<String> newAccount(@RequestParam(name = "Email") String Email, @RequestParam(name = "Accountname") String accountname, @RequestParam(name = "AccountType") String AccountType){

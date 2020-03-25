@@ -12,6 +12,10 @@ public class TransActions {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String transactionName;
+    private String Email;
+    private String Faccount;
+    private String toAccount;
+    private double value;
     private String textReciever;
     private double depositBeforeTransaction;
     private double depositAfterTransaction;
@@ -19,12 +23,14 @@ public class TransActions {
     private String time;
     private boolean sendingOrRecieving;
 
-    public TransActions() {
+    public TransActions(String transactionName, Double value, double currentDeposit, double v, LocalDate now, boolean sendingOrRecieving){}
+
+    public TransActions(String transActionName, String s, Double value, double currentDeposit, double v, LocalDate now, boolean b) {
     }
 
     public TransActions(Long id, String transactionName, String textReciever, double depositBeforeTransaction,
                         double depositAfterTransaction, LocalDate date, String time,
-                        boolean sendingOrRecieving){
+                        boolean sendingOrRecieving) {
         this.id = id;
         this.transactionName = transactionName;
         this.textReciever = textReciever;
@@ -34,6 +40,15 @@ public class TransActions {
         this.time = time;
         this.sendingOrRecieving = sendingOrRecieving;
     }
+
+    public TransActions(String Email, String transactionName,
+                        String Faacount, String toAccount, double value){
+    this.Email = Email;
+    this.transactionName = transactionName;
+    this.Faccount = Faccount;
+    this.toAccount = toAccount;
+    this.value = value;
+}
 
     public Long getId() {
         return id;
