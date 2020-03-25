@@ -35,7 +35,7 @@ public class UserLoginController {
     @PostMapping("/sendValidationCode")
     public ResponseEntity validateEmail(@RequestParam(name = "Email") String Email){
         Integer confirmEmailCode = generatePassword();
-        mailService.sendEmail(Email, "Welcome to Kea Bank, input these numbers:" + confirmEmailCode + "to, \nconfirm your Email");
+        mailService.sendemail(Email, "Welcome to Kea Bank, input these numbers:" + confirmEmailCode + "to, \nconfirm your Email");
         temporaryPassword.put(confirmEmailCode, Email);
 
         return new ResponseEntity(HttpStatus.OK);
