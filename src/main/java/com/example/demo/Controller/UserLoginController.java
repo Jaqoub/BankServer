@@ -76,7 +76,7 @@ public class UserLoginController {
 
     @PostMapping("/invalidLogin")
     public ResponseEntity invalidLogin(@RequestParam(name = "userName") String userName, @RequestParam(name = "passWord")String passWord) {
-        Optional<UserLogin> user = userLoginRepo.findByEmailAndPassWord(userName, passWord);
+        Optional<UserLogin> user = userLoginRepo.findByEmailAndPassword(userName, passWord);
 
         if (user.isPresent()) {
             return new ResponseEntity(user, HttpStatus.OK);
